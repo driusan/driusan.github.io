@@ -1,0 +1,46 @@
+/*
+ * Colour scheme based on: http://colorschemedesigner.com/#3i12n6KzIJUm1
+ */
+html, body {
+    height: 100%; 
+    width: 100%;
+}
+
+body {
+  color: black;
+  background: #115050;
+}
+
+.site {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    background: white;
+    padding: 3%;
+}
+
+a {
+    color: #155050;
+}
+
+a:visited {
+    color: #5B6868;
+}
+
+a:hover {
+    color: black;
+}
+
+/* Header */
+.header a {
+    color: #115050;
+    text-decoration: none;
+}
+
+.header h1 {
+    display: inline;
+    padding-right: 10px;
+
+}
+
+
