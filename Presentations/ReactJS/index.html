@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>React.js - The V in "MVC"</title>
+		<meta name="description" content="An Overview of PHP Composer">
+		<meta name="author" content="Dave MacFarlane">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../reveal.js-3.1.0/css/reveal.css">
+		<link rel="stylesheet" href="../reveal.js-3.1.0/css/theme/moon.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js-3.1.0/lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = '../reveal-3.1.0/css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+                    <h1>An Introduction to React.JS</h1>
+                    <h2>Dave's Favourite JS Framework</h2>
+				</section>
+                <section>
+                    <h2>Goals</h2>
+                    <ul>
+                        <li>Explain concepts of React.JS (with examples)</li>
+                        <li>Make fun of Ted</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>What is React.JS?</h2>
+                    <ul>
+                        <li>Javascript framework for constructing the DOM, written by Facebook</li>
+                        <li>"The V in MVC"</li>
+                        <li>Known for being very fast for interactive web pages</li>
+                        <li>Controversial</li>
+                        <li>Also a framework for writing native iOS apps: "Learn once, write anywhere"
+                            (Android support coming later)</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Features in React.JS</h2>
+                    <ul>
+                        <li>The Virtual DOM -- only updates things that have changed</li>
+                        <li>Both server and client side rendering (w/ node.js)</li>
+                        <li>Markup a page in static HTML, make interactive by decomposing the page into a series of components</li>
+                    </ul>
+                </section>
+                <section>
+                    <style>
+                    .fragment.strike {
+                        text-decoration: line-through;
+                    }
+                    .fragment.strike.current-fragment {
+                        text-decoration: none !important;
+                    }
+                    </style>
+                    <h2>Competitors</h2>
+                    <ul>
+                        <li class="fragment strike">Angular</li>
+                        <li class="fragment" >Mustache/Handlebars/Smarty/ERB/other templating languages (Remember: the "V" in MVC, not "An MVC framework")</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Thinking in React</h2>
+                    <ul>
+                        <li>See talk: <a href="https://www.youtube.com/watch?v=x7cQ3mrcKaY">"Rethinking Best Practices"</a></li>
+                        <li>Composition over inheritance (like the GUI version of functional programming)</li>
+                        <li>Components have "state" (mutable) and "properties" (immutable)</li>
+                        <li>State should only exist in one place, be passed down to subcomponents as properties</li>
+                    </ul>
+                </section>
+                <section>
+                    <section>
+                        <h2>Example</h2>
+                        <img src="CBrain.png">
+                    </section>
+                    <section>
+                        <h2>Example</h2>
+                        <img src="CBrain2.png">
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>Example 2</h2>
+                        <img src="AccessProfile.png">
+                    </section>
+                    <section>
+                        <h2>Example 2</h2>
+                        <img src="AccessProfile2.png">
+                        <small>Apologies for the bad graphics</small>
+                    </section>
+                    <section>
+                        <h2>Example 2</h2>
+                        <img src="AccessProfile3.png">
+                        <style> legend dl dt { 
+display: inline !important;
+}
+dl {
+    text-align: center;
+}
+dt:after {
+    content: ":";
+
+}
+dd {
+    display: inline !important;
+        clear: right;
+}
+                    dd:after {
+                        content: "\A"; white-space:pre;
+
+                    }
+                        </style>
+                        <legend>
+                            <dl>
+                                <dt>Black</dt>
+                                <dd>Filter Component</dd>
+
+                                <dt>Green</dt>
+                                <dd>Header Component</dd>
+
+                                <dt>Cyan</dt>
+                                <dd>Filter Item Component</dd>
+
+                                <dt>Yellow</dt>
+                                <dd>Action List Component</dd>
+
+                                <dt>Orange</dt>
+                                <dd>Action Button Component</dd>
+                            </dl>
+                        </legend>
+                    </section>
+                    <section>
+                        <h2>Some Simplified Bootstrap Markup</h2>
+                        <h3>(Only contains header and first row)</h3>
+                        <h4>((Fits on a slide but has enough to demo power of React))</h4>
+
+<pre><code class="html">&lt;div class="row"&gt;
+    &lt;h2&gt;Selection Filter&lt;/h2&gt;
+    &lt;div class="row"&gt;
+        &lt;div class="col-md-4"&gt;Site:&lt;/div&gt;
+        &lt;div class="col-md-4"&gt;&lt;select&gt;...&lt;/select&gt;&lt;/div&gt;
+        &lt;div class="col-md-4"&gt;DCCID:&lt;/div&gt;
+        &lt;div class="col-md-4"&gt;&lt;input type="text" /&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    </section>
+                    <section>
+                        <h2>Some XML Markup</h2>
+                        <pre><code class="xml">&lt;SelectionFilter Title="Selection Filter"&gt;
+    &lt;Filter Name="Site" Options=... /&gt;
+    &lt;Filter Name="DCCID"  /&gt;
+    &lt;Filter Name="Subproject" Options=... /&gt;
+    &lt;Filter Name="PSCID"  /&gt;
+&lt;/SelectionFilter&gt;</code>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                    <h2>In React (First Pass)</h2>
+                    <pre><code>FilterComponent = React.createClass({
+    render: function() {
+        return (
+            &lt;div className="row"&gt;
+                &lt;h2&gt;Selection Filter&lt;/h2&gt;
+                &lt;div className="row"&gt;
+                    &lt;div className="col-md-4"&gt;Site:&lt;/div&gt;
+                    &lt;div className="col-md-4"&gt;&lt;select&gt;...&lt;/select&gt;&lt;/div&gt;
+                    &lt;div className="col-md-4"&gt;DCCID:&lt;/div&gt;
+                    &lt;div className="col-md-4"&gt;&lt;input type="text" /&gt;&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        );
+    }
+});
+React.render("pageDiv", &lt;FilterComponent /&gt;);
+                    </code></pre>
+                    </section>
+                    <section>
+                        <h2>In React (Transpiled)</h2>
+                        <pre><code class="javascript">FilterComponent = React.createClass({displayName: 'FilterComponent',
+    render: function() {
+        return (
+            React.createElement("div", {className: "row"},
+                React.createElement("h2", null, "Selection Filter"),
+                React.createElement("div", {className: "row"},
+                    React.createElement("div", {className: "col-md-4"}, "Site:"),
+                    React.createElement("div", {className: "col-md-4"}, React.createElement("select", null, "...")),
+                    React.createElement("div", {className: "col-md-4"}, "DCCID:"),
+                    React.createElement("div", {className: "col-md-4"}, React.createElement("input", {type: "text"}))
+                )
+            )
+        );
+    }
+});
+React.render("pageDiv", React.createElement(FilterComponent, null));</pre></code>
+
+                    </section>
+                    <section>
+                    <h2>In React (With Title Property)</h2>
+                    <pre><code>FilterComponent = React.createClass({
+    render: function() {
+        return (
+            &lt;div className="row"&gt;
+                &lt;h2&gt;{this.props.Title}&lt;/h2&gt;
+                &lt;div className="row"&gt;
+                    &lt;div className="col-md-4"&gt;Site:&lt;/div&gt;
+                    &lt;div className="col-md-4"&gt;&lt;select&gt;...&lt;/select&gt;&lt;/div&gt;
+                    &lt;div className="col-md-4"&gt;DCCID:&lt;/div&gt;
+                    &lt;div className="col-md-4"&gt;&lt;input type="text" /&gt;&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            );
+        }
+});
+React.render("pageDiv", &lt;FilterComponent Title="Selection Filter"/&gt;);</code></pre>
+                    </section>
+                    <section>
+                    <h2>In React (With Subcomponents)</h2>
+                    <pre><code>FilterComponent = React.createClass({
+        render: function() {
+            return (
+                &lt;div className="row"&gt;
+                    &lt;h2&gt;{this.props.Title}&lt;/h2&gt;
+                    &lt;div className="row"&gt;
+                        &lt;SiteFilterComponent /&gt;
+                        &lt;CandidateFilterComponent /&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                            );
+        }
+});
+SiteFilterComponent = React.createClass({
+    render: function() {
+        return (
+            &lt;div&gt;
+                &lt;div className="col-md-4"&gt;Site:&lt;/div&gt;
+                &lt;div className="col-md-4"&gt;&lt;select&gt;...&lt;/select&gt;&lt;/div&gt;
+            &lt;/div&gt;
+        );
+    }
+});
+CandidateFilterComponent = React.createClass({
+    render: function() {
+        return (
+            &lt;div&gt;
+                &lt;div className="col-md-4"&gt;DCCID:&lt;/div&gt;
+                &lt;div className="col-md-4"&gt;&lt;input type="text" /&gt;&lt;/div&gt;
+            &lt;/div&gt;
+        );
+    }
+});
+React.render("pageDiv", &lt;FilterComponent Title="Selection Filter"/&gt;);</code></pre>
+                    </section>
+                    <section>
+                        <h2>Why are Site and Candidate so specific??</h2>
+                        <pre><code class="javascript">SelectFilterComponent = React.createClass({
+    render: function() {
+        return (
+            &lt;div&gt;
+                &lt;div className="col-md-4"&gt;{this.props.Label}:&lt;/div&gt;
+                &lt;div className="col-md-4"&gt;&lt;select&gt;{this.props.Options}&lt;/select&gt;&lt;/div&gt;
+            &lt;/div&gt;
+        );
+    }
+});
+SiteFilterComponent = React.createClass({
+    render: function() {
+        return &lt;SelectFilterComponent Label="Site" Options="..."/&gt;
+    }
+});
+
+                        </code></pre>
+                    </section>
+                    <section><h3>Can we get more generic?</h3></section>
+                    <section>
+                            <h4>Yes, with children</h4>
+                    <pre><code class="javascript">FilterComponent = React.createClass({
+        render: function() {
+            return (
+                &lt;div className="row"&gt;
+                    &lt;h2&gt;{this.props.Title}&lt;/h2&gt;
+                    &lt;div className="row"&gt;
+                        {this.props.children}
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                            );
+        }
+});
+/* &lt;...stuff from previous slides here...&gt; */
+React.render("pageDiv",
+&lt;FilterComponent Title="Selection Filter"&gt;
+    &lt;SelectFilterComponent Label="Site" Options=... /&gt;
+    &lt;TextFilterComponent Label="DCCID"  /&gt;
+    &lt;SelectFilterComponent Label="Subproject" Options=... /&gt;
+    &lt;TextFilterComponent Label="PSCID"  /&gt;
+&lt;/FilterComponent/&gt;
+);</code></pre>
+                    </section>
+                </section>
+                <section>
+                    <section><h4>So what about state (and interactions?)<h4></section>
+                    <section>
+                        <img src="AccessProfile3.png">
+                        <h4>Header toggle?</h4>
+                    </section>
+                    <section>
+                        <h2>Add a "collapsed" state</h2>
+                    <pre><code class="javascript">FilterComponent = React.createClass({
+        getInitialState: function() {
+            return {
+                "collapsed" : false
+            };
+        },
+        toggleHeader: function() {
+            var oldState = this.state.collapsed;
+            this.setState({
+                "collapsed" : !oldState
+            });
+            if (this.props.onHeaderToggle) {
+                this.props.onHeaderToggle();
+            }
+        },
+        render: function() { /* render method goes here */ }
+        }
+});</code></pre>
+                    </section>
+                    <section>
+                    <h2>Update Render Method to handle collapsed state</h2>
+<pre><code class="javascript">render: function() {
+    if (this.state.collapsed) {
+        return (&lt;div className="row"&gt;
+                    &lt;h2&gt;{this.props.Title}&lt;/h2&gt;
+               &lt;/div&gt;);
+    }
+    return (
+        &lt;div className="row"&gt;
+            &lt;h2&gt;{this.props.Title}&lt;/h2&gt;
+            &lt;div className="row"&gt;
+                {this.props.children}
+            &lt;/div&gt;
+        &lt;/div&gt;
+        );
+    }
+}</code></pre>
+                    </section>
+                    <section>
+                    <h2>Add interactivity</h2>
+<pre><code class="javascript">render: function() {
+    if(this.state.collapsed) {
+        return (&lt;div className="row"&gt;
+                    &lt;h2 onClick={this.toggleHeader}&gt;{this.props.Title}&lt;/h2&gt;
+               &lt;/div&gt;);
+    }
+    return (
+        &lt;div className="row"&gt;
+            &lt;h2 onClick={this.toggleHeader}&gt;{this.props.Title}&lt;/h2&gt;
+            &lt;div className="row"&gt;
+                {this.props.children}
+            &lt;/div&gt;
+        &lt;/div&gt;
+        );
+    }
+}</code></pre>
+                    </section>
+                </section>
+                <section>
+                    <h2>Review</h2>
+                    <ol>
+                        <li>Started with static bootstrap markup.</li>
+                        <li>Progressively decomposed into components.</li>
+                        <li>Made components reuseable with properties (the result was more semanticly meaningful than the
+                            original markup.)</li>
+                        <li>Added interactivity with state.</li>
+                        <li>Now we have a generic (toggleable) Filter component, TextFilter and SelectFilter
+                            subcomponents that can be reused on any of other page.</li>
+                        <li>Ted has silly hair.</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>Thinking in React, Again</h2>
+                    <p>Composition over Inheritance</p>
+                    <p>Separation of concerns, not technologies</p>
+                </section>
+                <section>
+                    <h1>Thanks for your time</h1>
+                    <img src="http://29.media.tumblr.com/tumblr_lhug065IE11qfyzelo1_1280.jpg" />
+                </section>
+
+			</div>
+
+		</div>
+
+		<script src="../reveal.js-3.1.0/lib/js/head.min.js"></script>
+		<script src="../reveal.js-3.1.0/js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../reveal.js-3.1.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal.js-3.1.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js-3.1.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js-3.1.0/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal.js-3.1.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../reveal.js-3.1.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
