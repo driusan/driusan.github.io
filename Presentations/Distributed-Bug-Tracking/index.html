@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>A Brief Introduction To Go</title>
+		<meta name="description" content="An Overview of Distributed Bug Tracking">
+		<meta name="author" content="Dave MacFarlane">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../reveal.js-3.1.0/css/reveal.css">
+		<link rel="stylesheet" href="../reveal.js-3.1.0/css/theme/moon.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js-3.1.0/lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = '../reveal-3.1.0/css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+                <h1>Distributed Bug Tracking in 2016</h1>
+                <h2>Concepts and Implementations</h2>
+				</section>
+                <section>
+                <h2>What is Distributed Bug Tracking?</h2>
+                <ul>
+                    <li>A way of leveraging distributed version control systems (ie. Git) to track issues</li>
+                    <li>Technically, any form of database stored in a DVCS can be considered a distributed bug
+                    tracker as long as it's stored in a plaintext-ish format (JSON, XML, plain text)
+                    so that conflicts can be resolved.</li>
+                </ul>
+                </section>
+                <section>
+                <h2>Why Distributed Bug Tracking?</h2>
+                <blockquote>
+                    <p>Bugs and code that live on branches are tracked together—when a branch is merged, both the code changes and bug changes that the branch contains are merged alongside each other. We no longer have to be confused about whether a fix that is applied to the development branch but not yet present in the production branch means that our bug is “fixed”.</p>
+                    <p>Users can fully modify bug state while offline, unlike with many centralized bugtrackers.</p>
+                </blockquote>
+                </section>
+                <section>
+                <h2>Why Distributed Bug Tracking? (Cont)</h2>
+                <blockquote>
+                    <p>When a user checks out your source code, she gets the current bug state for free.</p>
+                    <p>We can still provide access to a friendly web interface for users—in this model, a web interface becomes just another client that merges with the main repository. -- Bugs Everywhere webpage</p>
+                </blockquote>
+                </section>
+                <section>
+                <h2>Some Currently Available Distributed Bug Trackers</h2>
+                <ul>
+                    <li>TODO.txt (~5000) or BUGS.txt (~30000) tracked in source control (~1960s)</li>
+                    <li>Bugs Everywhere (2003-?) (~200</li>
+                    <li>bug* (2015-?)</li>
+                </ul>
+                <aside>Full disclosure: I am the author of bug</aside>
+                </section>
+                <section>
+                <h2>Why didn't Distributed Bug Tracking take off (2003-present)?</h2>
+                <ul>
+                    <li>Hashes are hard to use</li>
+                    <li>Vendor lock-in (can't query or create bugs without the client installed)</li>
+                    <li>Pitched as a replacement for centralized bug tracking, but that's not feasible
+                        unless entire team is commited.</li>
+                </ul>
+                </section>
+                <section>
+                <h2>Brief Overview of Bug's Design Philosophy</h2>
+                <ul>
+                    <li>"Database" is convention for a series of human readable plaintext files</li>
+                    <li>Issue identifier is the issue title, not a hash</li>
+                    <li>Result is that the database is easily useable with no tools</li>
+                </ul>
+                </section>
+                <section>
+                <h2>Obvious Criticism</h2>
+                <ul>
+                    <li>Q: Won't that result in collisions?</li>
+                    <li>A: Only for duplicate bugs or bugs where the title isn't descriptive enough
+                    to disambiguate from other bugs. Either can be resolved with standard 
+                    merge tools.</li>
+
+                </ul>
+                </section>
+                <section>
+                <h2>Benefits</h2>
+                <ul>
+                    <li>Easy to keep track of work left to do on branches without overhead of
+                        centralized web based repository (making notes </li>
+                    <li>Can keep track of status on a much more granular level (commands are near
+                    instant and don't interrupt workflow)</li>
+                    <li>Much easier to remember where you are when you switch branches or go to meetings
+                        and need to pick it up later ("bug list" is context-sensitive)</li>
+                </ul>
+                </section>
+
+
+			</div>
+
+		</div>
+
+		<script src="../reveal.js-3.1.0/lib/js/head.min.js"></script>
+		<script src="../reveal.js-3.1.0/js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../reveal.js-3.1.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal.js-3.1.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js-3.1.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js-3.1.0/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal.js-3.1.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../reveal.js-3.1.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
