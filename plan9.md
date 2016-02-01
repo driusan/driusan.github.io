@@ -21,6 +21,10 @@ started with it.
 - The default is to assume a 640x480x8bit VGA display driver. Since this
   is 2016, if you want to go higher resolution, use vesa instead of VGA
   (and use a 32 bit display, not an 8 bit.)
+- After much fighting with ip/ipconfig, I learned that you need to make
+  sure the adapter type is set to "Intel PRO/1000 MT Server (82545EM)"
+  under advanced in your VirtualBox network adapter configuration. Anything
+  else won't work.
 
 ## Getting started:
 
@@ -64,8 +68,8 @@ started with it.
   /mnt/keys/$username. The obvious solution (change the permissions)
   doesn't work, and I haven't figured it out yet.
 
-So now I'm in a state where I have a Plan9 system up and running, no 
-network, my own user, but no password, and no way to change it.
+So now I'm in a state where I have a Plan9 system up and running, my own 
+user, but no password, and no way to change it.
 
 In conclusion, I don't think this will be the year of Plan 9 on the
 desktop.
