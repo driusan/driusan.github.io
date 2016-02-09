@@ -1,156 +1,141 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>A Brief Introduction To Go</title>
-		<meta name="description" content="An Overview of Distributed Bug Tracking">
-		<meta name="author" content="Dave MacFarlane">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Distributed Bug Tracking With Bug</title>
+    
+    <meta name="description" content="bug is a distributed bug tracking tool based on the filesystem and git. This is a presentation about it." />
+    <meta name="author" content="Dave MacFarlane" />
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+    <link href="css/impress-demo.css" rel="stylesheet" />
+    
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<body class="impress-not-supported">
 
-		<link rel="stylesheet" href="../reveal.js-3.1.0/css/reveal.css">
-		<link rel="stylesheet" href="../reveal.js-3.1.0/css/theme/moon.css" id="theme">
+<div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
 
-		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="../reveal.js-3.1.0/lib/css/zenburn.css">
+<div id="impress">
 
-		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
-		<script>
-			if( window.location.search.match( /print-pdf/gi ) ) {
-				var link = document.createElement( 'link' );
-				link.rel = 'stylesheet';
-				link.type = 'text/css';
-				link.href = '../reveal-3.1.0/css/print/pdf.css';
-				document.getElementsByTagName( 'head' )[0].appendChild( link );
-			}
-		</script>
+    <div class="step slide boring" data-x="-1000" data-y="-1500">
+        <h1>Distributed Bug Tracking in the 21st Century</h1>
+        <h2>A Presentation By Dave MacFarlane</h2>
+        <h6>(Apologies for getting carried away with the CSS3.)</h6>
+    </div>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
+    <div class="step slide boring" data-x="0" data-y="-1500">
+        <h1>What is Distributed Bug Tracking?</h1>
+        <ul>
+            <li>A way of leveraging distributed version control systems (ie. Git, Mercurial) to track issues</li>
+            <li>Technically, any form of database stored in a DVCS can be considered a distributed bug tracker as long as it's stored in a plaintext-ish format (JSON, XML, plain text) so that conflicts can be resolved.</li>
+        </ul>
+    </div>
 
-	<body>
-
-		<div class="reveal">
-
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
-				<section>
-                <h1>Distributed Bug Tracking in 2016</h1>
-                <h2>Concepts and Implementations</h2>
-				</section>
-                <section>
-                <h2>What is Distributed Bug Tracking?</h2>
-                <ul>
-                    <li>A way of leveraging distributed version control systems (ie. Git) to track issues</li>
-                    <li>Technically, any form of database stored in a DVCS can be considered a distributed bug
-                    tracker as long as it's stored in a plaintext-ish format (JSON, XML, plain text)
-                    so that conflicts can be resolved.</li>
-                </ul>
-                </section>
-                <section>
-                <h2>Why Distributed Bug Tracking?</h2>
-                <blockquote>
-                    <p>Bugs and code that live on branches are tracked together—when a branch is merged, both the code changes and bug changes that the branch contains are merged alongside each other. We no longer have to be confused about whether a fix that is applied to the development branch but not yet present in the production branch means that our bug is “fixed”.</p>
-                    <p>Users can fully modify bug state while offline, unlike with many centralized bugtrackers.</p>
-                </blockquote>
-                </section>
-                <section>
-                <h2>Why Distributed Bug Tracking? (Cont)</h2>
-                <blockquote>
-                    <p>When a user checks out your source code, she gets the current bug state for free.</p>
-                    <p>We can still provide access to a friendly web interface for users—in this model, a web interface becomes just another client that merges with the main repository. -- Bugs Everywhere webpage</p>
-                </blockquote>
-                </section>
-                <section>
-                <h2>Some Currently Available Distributed Bug Trackers</h2>
-                <ul>
-                    <li>TODO.txt (~5000) or BUGS.txt (~30000) tracked in source control (~1960s)</li>
-                    <li>Bugs Everywhere (2003-?) (~200</li>
-                    <li>bug* (2015-?)</li>
-                </ul>
-                <aside>Full disclosure: I am the author of bug</aside>
-                </section>
-                <section>
-                <h2>Why didn't Distributed Bug Tracking take off (2003-present)?</h2>
-                <ul>
-                    <li>Hashes are hard to use</li>
-                    <li>Vendor lock-in (can't query or create bugs without the client installed)</li>
-                    <li>Pitched as a replacement for centralized bug tracking, but that's not feasible
-                        unless entire team is commited.</li>
-                </ul>
-                </section>
-                <section>
-                <h2>Brief Overview of Bug's Design Philosophy</h2>
-                <ul>
-                    <li>"Database" is convention for a series of human readable plaintext files</li>
-                    <li>Issue identifier is the issue title, not a hash</li>
-                    <li>Result is that the database is easily useable with no tools</li>
-                </ul>
-                </section>
-                <section>
-                <h2>Obvious Criticism</h2>
-                <ul>
-                    <li>Q: Won't that result in collisions?</li>
-                    <li>A: Only for duplicate bugs or bugs where the title isn't descriptive enough
-                    to disambiguate from other bugs. Either can be resolved with standard 
-                    merge tools.</li>
-
-                </ul>
-                </section>
-                <section>
-                <h2>Benefits</h2>
-                <ul>
-                    <li>Easy to keep track of work left to do on branches without overhead of
-                        centralized web based repository (making notes </li>
-                    <li>Can keep track of status on a much more granular level (commands are near
-                    instant and don't interrupt workflow)</li>
-                    <li>Much easier to remember where you are when you switch branches or go to meetings
-                        and need to pick it up later ("bug list" is context-sensitive)</li>
-                </ul>
-                </section>
+    <div class="step" data-x="0" data-y="0">
+        <div class="scaling">
+        <h1 class="heading" style="color: rgb(0, 43, 54);">Why Distributed Bug Tracking (BE)</h1>
+<blockquote><p>Bugs and code that live on branches are tracked together—when a branch is merged, both the code changes and bug changes that the branch contains are merged alongside each other. We no longer have to be confused about whether a fix that is applied to the development branch but not yet present in the production branch means that our bug is "fixed".</p><p>Users can fully modify bug state while offline, unlike with many centralized bugtrackers.</p>
+<p>When a user checks out your source code, she gets the current bug state for free.</p>
+-- Bugs Everywhere website
+</blockquote>
+</div>
+    </div>
 
 
-			</div>
+    <div class="step" data-x="850" data-y="3000" data-rotate="90">
+        <h1 style="color: rgb(0, 43, 54);">Why Distributed Bug Tracking (Dave)</h1>
+        <p>By combining source control and issues on the same branch, bug lists become context sensitive, offline capable, and very fast.</p>
+    </div>
+    <div class="step" data-x="850" data-y="3000" data-rotate="-90">
+        <p>It's much easier to drop things off and pick them up knowing all you need to do is run "bug list" to see what's unresolved on a branch.</p>
+    </div>
+    <div class="step" data-x="850" data-y="3000" data-rotate="270">
+        <p>Centralized bug trackers are good for tracking user problems with released products, but ill-suited to tracking the state of unreleased feature branches.</p>
+    </div>
+    <div class="step" data-x="850" data-y="3000" data-rotate="90">
+        <p>By being offline and commandline based, the tools are more flexible and scriptable.</p>
+    </div>
 
-		</div>
+    <div class="step" data-x="2825" data-y="2325" data-z="-3000" data-rotate="300" data-scale="1">
+        <p>Let's have a demo!</p>
+    </div>
 
-		<script src="../reveal.js-3.1.0/lib/js/head.min.js"></script>
-		<script src="../reveal.js-3.1.0/js/reveal.js"></script>
+    <div class="step slide boring">
+        <h1>But first.. why didn't distributed bug tracking take off?</h1>
+        <ul>
+            <li>Vendor lock-in (files are stored in a hidden directory that's difficult to access without the be client)</li>
+            <li>Hashes are hard to use</li>
+            <li>Pitched as a replacement for centralized bug tracking, but that's not feasible unless entire team is commited (and also not
+                necessary to get the benefits of distributed bug tracking).</li>
+        </ul>
+    </div>
+    <div class="step slide boring">
+        <h1>How is Dave's Distributed Bug Tracker ("bug") different?</h1>
+        <ul>
+            <li>Bugs are stored in a non-hidden organized directory structure of plaintext files</li>
+            <li>Bug titles are their identifiers, not hashes</li>
+            <li>Unstable identifier numbers can be used to reference things on the command line for simplicity (stable identifiers can also
+                be manually assigned for long lasting issues.)</li>
+        </ul>
+    </div>
+    <div class="step slide" data-x="3500" data-y="-850" data-rotate="270">
+        <h1 style="text-align: center; color: blue; padding-bottom: 2em;">/* Integrating With A Go App */</h1>
+        <code>
+<pre>
+import (
+    "fmt"
+    "github.com/driusan/bug/bugs"
+)
 
-		<script>
+func main() {
+    b := bugs.New("I am a bug report")
+    fmt.Fprintf(b, "I am detail, here me roar!\n");
+    fmt.Fprintf(b, "More details!\n");
+}</pre>
+        </code>
 
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+    </div>
 
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+    <div class="step slide" data-x="6700" data-y="-300">
+        <h1 style="text-align: center; color: blue; padding-bottom: 1em;">/* Recovering In An HTTP Handler Function*/</h1>
+<code>
+<pre>
+func handlerFunc(w ResponseWriter, r *http.Request) {
+    defer func() {
+        if r := recover(); r != nil {
+            b := bugs.New(fmt.Sprintf(
+                "Crash on %s from %s",
+                r.URL.Path,
+                r.RemoteAddr
+            ))
+            fmt.Fprintf(b, "There was a 500 error")
+            fmt.Fprintf(b, "on %s\n", r.URL.Path)
+            fmt.Fprintf(b, "The request was: %s", r)
+        }
+    }()
+    <span style="text-align: center; color: blue;">/* Normal handler code goes here */</span>
+}
+</pre>
+</code>
+    </div>
 
-				// Parallax scrolling
-				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-				// parallaxBackgroundSize: '2100px 900px',
+    <div class="step" data-x="6300" data-y="2000" data-rotate="20">
+        <h1>Thanks for your time!</h1>
+        <p>(Sorry again about the gratuitous animations.)</p>
+        <img src="catbug.gif">
+    </div>
+</div>
 
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: '../reveal.js-3.1.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: '../reveal.js-3.1.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '../reveal.js-3.1.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '../reveal.js-3.1.0/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: '../reveal.js-3.1.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: '../reveal.js-3.1.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-				]
-			});
+<script src="js/impress.js"></script>
+<script>impress().init();</script>
 
-		</script>
-
-	</body>
+</body>
 </html>
