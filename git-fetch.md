@@ -120,6 +120,6 @@ the response to the 0000 line, and then after sending this response
 it waited for the "0009done\n" line to send the actual data commit
 data.)
 
-The actual data, after you've gotten this far, is a git pack file that
+The actual data, after you've gotten this far, is a [git pack](git-pack.html) file that
 has it's own idiosyncrasies, but I'll save the details of that for
 another day. (Also, I haven't entirely figured it out yet.)
