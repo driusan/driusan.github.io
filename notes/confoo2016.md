@@ -39,14 +39,14 @@ myself.
    release/support schedule
  - PHP7 is a major improvement over 5
 
- ## You Don't Need Javascript For That!
-  - "label for" attribute gives focus to the input element, it isn't just
-    for screen readers.
-  - datalist allows autocomplete like functionality without javascript
-  - there are :valid :invalid etc pseudo-selectors for styling forms with
-    HTML5 elements
-  - there is a pattern=regex attribute for HTML5 elements
-  - flexbox is very powerful for layout, need to look into more.
-  - CSS3 animations are very powerful for design and layout without
-    any javascript
+## [You Don't Need Javascript For That](http://www.benmvp.com/slides/confoo2016-no-js.html#/)
+ - "label for" attribute gives focus to the input element, it isn't just
+   for screen readers.
+ - datalist allows autocomplete like functionality without javascript
+ - there are :valid :invalid etc pseudo-selectors for styling forms with
+   HTML5 elements
+ - there is a pattern=regex attribute for HTML5 elements
+ - flexbox is very powerful for layout, need to look into more.
+ - CSS3 animations are very powerful for design and layout without
+   any javascript
 
