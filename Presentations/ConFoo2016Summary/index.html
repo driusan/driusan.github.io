@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Confoo 2016</title>
+		<meta name="description" content="An Summary of Talks I Attended at Confoo 2016">
+		<meta name="author" content="Dave MacFarlane">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../reveal.js-3.1.0/css/reveal.css">
+		<link rel="stylesheet" href="../reveal.js-3.1.0/css/theme/moon.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js-3.1.0/lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = '../reveal-3.1.0/css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+                    <h1>Summary of Confoo 2016</h1>
+                    <h2>by Dave MacFarlane</h2>
+                    <h3>ADM: March 4, 2016</h3>
+				</section>
+                <section>
+                    <h2>Overall Impressions</h2>
+                    <ul>
+                        <li>Very good conference (polyglot conference about web development)</li>
+                        <li>Would definitely go back next year</li>
+                        <li>I'm just going give a really quick summary of the important things I learned from some of the talks I attended</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>12 Reasons Your API Sucks (Keith Casey)</h2>
+                    <ul>
+                        <li>"Time to hello world" important metric</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Introduction To Spark (Francis Toth)</h2>
+                    <ul>
+                        <li>Basic introduction to Spark as a map/reduce platform. Not very relevant for us</li>
+                        <li>Nice guy to have lunch with</li>
+                    </ul>
+                </section>
+                <section>
+                    <section>
+                        <h2>Speeding Up The Web With PHP7 (Rasmus Lerdorf)</h2>
+                        <ul>
+                            <li>Benchmarks show speed of PHP7 is about twice as fast as PHP 5.6 (less benefit for database-bound applications)</li>
+                            <li>Memory usage is drastically lower</li>
+                            <li>At etsy they could turn off ~50% of their servers after upgrading to PHP7</li>
+                            <li>PHP 7.1 will have JIT compiler</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Speeding Up The Web With PHP7 (Part 2) (Rasmus Lerdorf)</h2>
+                        <ul>
+                            <li>Q1: Type exceptions are still runtime exceptions, not parse time exceptions (because typing is optional)</li>
+                            <li>phan -- static analysis tool for PHP7 (not going to be included in php -l)</li>
+                            <li>Q2: The AST is only available from the PHP runtime with an extension</li>
+                        </ul>
+                    </section>
+                </section>
+                <section>
+                    <h2>PHPUnit 5, PHP 7 and Beyond (Sebastian Bergmann)</h2>
+                    <ul>
+                        <li>PHPUnit was able to drastically reduce the time to delivery by switching to semantic versioning (was ~1.5 years per release, now a release every 8 weeks)</li>
+                        <li>One of the reasons for PHPUnit 5 is to add support for PHP7 and remove support for old legacy cruft still in PHPUnit, because you can't use new PHP features if you're still supporting old versionings</li>
+                    </ul>
+                </section>
+                <section>
+                <h2>Rewriting 12-Year-Old Code (Anna Filina)</h2>
+                <ul>
+                    <li>Summary of techniques to update legacy code</li>
+                    <li>We're already doing a lot of them</li>
+                    <li>1 new idea: "Design Extraction"</li>
+                </ul>
+                </section>
+                <section>
+                    <h2>You Don't Need JavaScript for that! (Ben Illegbodu)</h2>
+                    <ul>
+                        <li>content-before:, custom fonts, and :hover selectors let you do pretty interactive menus in pure CSS</li>
+                        <li>HTML5 has input types which include validation for common cases (email, url, date, etc) and pseudo-selectors let you style them for valid/invalid states in pure CSS</li>
+                        <li>CSS3 animations/transitions are pretty powerful</li>
+                        <li>CSS flexbox is powerful (change rendering order, vertically or horizontally align things, etc)</li>
+                    </ul>
+                </section>
+                <section>
+                <h2>Flexbox: Coming to a browser near you (Jen Kramer)</h2>
+                <ul>
+                    <li>New, flexible method of doing layout in CSS</li>
+                    <li>http://flexboxfroggy.com/</li>
+                    <li>Supported in most browsers today</li>
+                    <li>Probably going to be important for front end development in the future (see: next slide)</li>
+                </ul>
+                </section>
+                <section>
+                <h2>Level Up Your Team (Stefan Koopsmanschap)</h2>
+                <ul>
+                    <li>It's hard to find good developers, because good developers already have jobs.</li>
+                    <li>Even if you find good developers, things change so quickly in web development that in 6 months they might not be "good" if they don't keep up to date</li>
+                    <li>Need a culture of learning and to invest in training</li>
+                    <li>Management: "What happens if we invest in people and they leave?" Response: "What happens if we don't and they stay?"</li>
+                </section>
+                <section>
+                <h2>Learn. Reflect. Repeat. (Melinda Seckington)</h2>
+                <ul>
+                    <li>How to create a culture of learning?</li>
+                    <li>Lightning Talks</li>
+                    <li>HackDays</li>
+                    <li>Other things in my notes</li>
+                </ul>
+                </section>
+                <section>
+                <h2>Deliver More, Stress Less with Kanban (Julia Wester)</h2>
+                <ul>
+                    <li>Essentially a summary of the book "Kanban: Successful Evolutionary Change for Your Technology Business" by David J. Anderson</li>
+                    <li>Explanations of how it was used at the NBA</li>
+                </ul>
+                </section>
+                <section>
+                <h2>Decrease Conflict and Team Dysfunction (Sonia di Maulo)</h2>
+                <ul>
+                    <li>An interactive exercise to come up with a code of "guiding priniples" for an organization/team</li>
+                    <li>Having the "principles" that the organizational culture is based on written down helps integrate new people and decrease conflict in large teams</li>
+                </ul>
+                </section>
+                <section>
+                    <h2>The end</h2>
+                    <h4>(I have more notes on any given presentation that are beyond the scope of an ADM if you're interested)</h4>
+                    <img src="cat-graduate-mortar-board.jpg" height="400" border="0" style="border: 0"/>
+                </section>
+			</div>
+
+		</div>
+
+		<script src="../reveal.js-3.1.0/lib/js/head.min.js"></script>
+		<script src="../reveal.js-3.1.0/js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../reveal.js-3.1.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal.js-3.1.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js-3.1.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js-3.1.0/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal.js-3.1.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../reveal.js-3.1.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
