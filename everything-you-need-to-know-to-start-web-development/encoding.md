@@ -14,8 +14,7 @@ to here:
 <img alt="Cat on keyboard" src="cat-on-keyboard1.jpg" style="width: 33%">
 
 If you already know all about character sets and encoding/decoding them, you 
-can probably stop reading now and wait for part 2, where I'll try to explain
-HTTP.
+can probably skip to [part 2](network.html), where I try to explain HTTP.
 
 ****
 
