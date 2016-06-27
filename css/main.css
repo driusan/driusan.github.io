@@ -43,4 +43,8 @@ a:hover {
 
 }
 
-
+pre.highlight {
+	padding: 2em;
+	background-color: #EFF;
+	border: thin solid black;
+}
