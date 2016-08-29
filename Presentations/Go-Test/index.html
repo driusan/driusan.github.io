@@ -2,8 +2,8 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>A Brief Introduction To Go</title>
-		<meta name="description" content="An Overview of Important JS APIs">
+		<title>A Brief Introduction To Testing in Go</title>
+		<meta name="description" content="An Overview of the Stanard Go Testing framework">
 		<meta name="author" content="Dave MacFarlane">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -42,6 +42,7 @@
 				<section>
                     <h1>A Brief Introduction To Testing In Go</h1>
 			<h2>GoMTL-03</h2>
+			<h3>August 30, 2016</h3>
 				</section>
                 <section>
                     <h2>What's special about testing in Go?</h2>
@@ -67,7 +68,7 @@
 			<ul>
 				<li><code>func Test*(t *testing.T)</code></li>
 				<li><code>func Example*()</code></li>
-				<li><code>func Bench*(t *testing.B)</code></li>
+				<li><code>func Benchmark*(t *testing.B)</code></li>
 			</ul>
 	            </section>
                 <section>
@@ -82,11 +83,12 @@ func TestSomething(t *testing.T) {
 		print("The laws of math are broken!")
 		t.Fail()
 	}
+}
 /* Output:
 PASS
 ok  	sample	0.006s
 */
-}</code></pre>
+</code></pre>
 
                 </section>
 	<section>
@@ -106,7 +108,7 @@ func TestSomething(t *testing.T) {
 FAIL
 FAIL	sample	0.005s
 */
-}</code></pre>
+</code></pre>
                 </section>
 
 	<section>
@@ -119,12 +121,14 @@ func TestSomething(t *testing.T) {
 	if val := SomeFuncInPackage(); val != 67 {
 		t.Errorf("SomeFuncInPackage: got %v want %v", val, 67)
 	}
+}
 /* Output?
 --- FAIL: TestSomething (0.00s)
 	test_test.go:7: SomeFuncInPackage: got 66 want 67
 FAIL
-FAIL	sample	0.006s */
-}</code></pre>
+FAIL	sample	0.006s
+*/
+</code></pre>
                 </section>
 	<section>
 				<h2>Table Driven Test (Bestest)</h2>
@@ -149,14 +153,12 @@ func TestAddTwoNumbers(t *testing.T) {
 		}
 	}
 }
-
 /* Output: --- FAIL: TestAddTwoNumbers (0.00s)
 	foo_test.go:18: AddTwoNumbers(-3, -1): got -4 want 1
 FAIL
 FAIL	sample	0.007s
-
  */
-}</code></pre>
+</code></pre>
                 </section>
 	</section>
 	<section>
@@ -166,11 +168,10 @@ FAIL	sample	0.007s
 
 import "fmt"
 
-func ExampleHello() {
-        fmt.Println("hello")
-        // Output: hello
+func ExampleGreet() {
+        Greet("John")
+        // Output: Hello, John!
 }
-
 /* go test output:
 ok  	sample	0.005s
 */
@@ -182,17 +183,16 @@ ok  	sample	0.005s
 
 import "fmt"
 
-func ExampleHello() {
-        fmt.Println("goodbye")
-        // Output: hello
+func ExampleGreet() {
+	Greet("Jean")
+        // Output: Hello, John!
 }
-
 /* go test output:
---- FAIL: ExampleHello (0.00s)
+--- FAIL: ExampleGreet (0.00s)
 got:
-goodbye
+Hello, Jean!
 want:
-hello
+Hello, John!
 FAIL
 FAIL	sample	0.006s
 */
@@ -201,6 +201,10 @@ FAIL	sample	0.006s
 	<section>
 		<h2>Example from standard html package</h2>
 		<a href="https://golang.org/src/html/example_test.go"><img src="Godoc.png" /></a>
+		<div>
+		<a href="https://golang.org/src/html/example_test.go">Src</a> |
+		<a href="https://godoc.org/html/">Go Doc</a>
+		</div>
 	</section>
 	</section>
 	<section>
@@ -216,7 +220,6 @@ testing: warning: no tests to run
 PASS
 BenchmarkHello-4	20000000	        85.4 ns/op
 ok  	sample	1.805s
-
 */
 </code></pre>
 		</section>
@@ -230,8 +233,9 @@ ok  	sample	1.805s
 }
 /* testing: warning: no tests to run
 PASS
-BenchmarkHello-4	      30	  50789779 ns/op
-ok  	sample	1.585s
+BenchmarkHello-4	      10	 102972252 ns/op
+ok  	sample	1.142s
+
 */
 </code></pre>
 		</section>
@@ -259,6 +263,9 @@ func TestSomething(t *testing.T) {
 	</section>
 	<section>
 	<h1>Thanks for your time</h1>
+	<a href="https://driusan.github.io/Presentations/Go-Test/">https://driusan.github.io/Presentations/Go-Test/</a>
+
+
 	</section>
 			</div>
 
