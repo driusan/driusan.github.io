@@ -50,7 +50,7 @@
 			<li>Testing is first class part of the language</li>
 			<li>Testing in Go is coding in Go (no DSL)</li>
 			<li>Can be integrated into go doc</li>
-			<li>First class benchmarking support</li>
+			<li>Includes benchmarking support</li>
 			<li>Built into standard tooling</li>
                     </ul>
                 </section>
@@ -163,10 +163,26 @@ FAIL	sample	0.007s
 	</section>
 	<section>
 	<section>
-		<h2>Example Test/Doc (Pass)</h2>
+		<h2>Example from standard html package</h2>
+		<a href="https://golang.org/src/html/example_test.go"><img src="Godoc.png" /></a>
+		<div>
+		<a href="https://golang.org/src/html/example_test.go">Src</a> |
+		<a href="https://godoc.org/html/">Go Doc</a>
+		</div>
+	</section>
+
+	<section><h2>Example Function</h2>
 <pre><code>package sample
 
 import "fmt"
+
+func Greet(name string) {
+	fmt.Printf("Hello, %s!\n", name)
+}</code></pre>
+	</section>
+	<section>
+		<h2>Example Test/Doc (Pass)</h2>
+<pre><code>package sample
 
 func ExampleGreet() {
         Greet("John")
@@ -180,8 +196,6 @@ ok  	sample	0.005s
 	<section>
 		<h2>Example Test/Doc (Fail)</h2>
 <pre><code>package sample
-
-import "fmt"
 
 func ExampleGreet() {
 	Greet("Jean")
@@ -199,12 +213,21 @@ FAIL	sample	0.006s
 </code></pre>
 	</section>
 	<section>
-		<h2>Example from standard html package</h2>
-		<a href="https://golang.org/src/html/example_test.go"><img src="Godoc.png" /></a>
-		<div>
-		<a href="https://golang.org/src/html/example_test.go">Src</a> |
-		<a href="https://godoc.org/html/">Go Doc</a>
-		</div>
+		<h2>Example Test/Doc (Unordered)</h2>
+<pre><code>package sample
+
+import "fmt"
+
+func ExampleGreet() {
+	Greet("Jean")
+	Greet("John")
+        // Unordered output: Hello, John!
+	// Hello, Jean!
+}
+/* go test output:
+ok  	sample	0.006s
+*/
+</code></pre>
 	</section>
 	</section>
 	<section>
